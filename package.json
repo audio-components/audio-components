@@ -7,7 +7,9 @@
     "start": "start-storybook -p 4010",
     "lint": "eslint ."
   },
-  "dependencies": {},
+  "dependencies": {
+    "color": "^3.1.2"
+  },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.3",
