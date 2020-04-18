@@ -1,0 +1,42 @@
+{
+  "name": "audio-components",
+  "version": "0.0.1",
+  "scripts": {
+    "build": "babel src -d lib --copy-files --ignore **/*.example.js,**/*.spec.js",
+    "storybook:build": "build-storybook",
+    "start": "start-storybook -p 4010",
+    "lint": "eslint ."
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@babel/preset-react": "^7.8.3",
+    "@storybook/addon-actions": "^5.3.18",
+    "@storybook/addon-info": "^5.3.18",
+    "@storybook/addon-knobs": "^5.3.18",
+    "@storybook/addon-links": "^5.3.18",
+    "@storybook/addon-options": "^5.3.18",
+    "@storybook/addons": "^5.3.18",
+    "@storybook/channels": "^5.3.18",
+    "@storybook/react": "^5.3.18",
+    "babel-loader": "8.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-gerard": "^1.1.3",
+    "prettier": "^2.0.4",
+    "prettier-config-gerard": "^1.0.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.0.0"
+  },
+  "peerDependencies": {
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "styled-components": "^5.0.0"
+  },
+  "files": [
+    "lib",
+    "README.md"
+  ]
+}
