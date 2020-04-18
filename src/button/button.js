@@ -6,7 +6,7 @@ const ButtonRoot = styled.button`
   outline: none;
   background: none;
 
-  border: 2px solid currentColor;
+  border: 1px solid currentColor;
 `
 
 const Button = ({ onClick, children }) => {
