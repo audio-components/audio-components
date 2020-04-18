@@ -1,4 +1,3 @@
-codemods/__testfixtures__
-coverage
-# ignore old icons til they are deprecated
-src/icon-components
+node_modules
+lib
+storybook-static

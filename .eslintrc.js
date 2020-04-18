@@ -1,3 +1,3 @@
 module.exports = {
-  extends: ['eslint-config-gerard/typescript'],
+  extends: ['eslint-config-gerard'],
 }
