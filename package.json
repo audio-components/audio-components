@@ -1,6 +1,6 @@
 {
   "name": "audio-components",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "scripts": {
     "build": "babel src -d lib --copy-files --ignore **/*.example.js,**/*.spec.js",
     "storybook:build": "build-storybook",
