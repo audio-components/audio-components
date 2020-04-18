@@ -1,0 +1,29 @@
+import { Story, Preview, Props, Meta } from '@storybook/addon-docs/blocks'
+import { withKnobs, text, select, number, color } from '@storybook/addon-knobs'
+
+import Knob from '.'
+
+
+<Meta title="Knob" />
+
+# Knob
+
+<Props of={Knob} />
+
+<Preview>
+  <Story name='default'>
+    <div style={{ padding: '32px', background: color('color', '#333333') }}>
+      <Knob
+        value={number('value', 0)}
+        min={number('min', 0)}
+        max={number('max', 1)}
+        law={select('law', ['linear', 'log', 'pow'], 'linear')}
+        size={select('size', ['small', 'medium', 'big'], 'medium')}
+        label={text('label', 'Gain')}
+        color={color('color', '#333333')}
+        textColor={color('textColor', '#888888')}
+      />
+    </div>
+  </Story>
+</Preview>
+
