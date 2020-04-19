@@ -1,3 +1,3 @@
 # audio-components
 
-[Storybook](https://gerardabello.github.io/audio-components/)
+[Storybook](https://audio-components.github.io/audio-components/)
