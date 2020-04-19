@@ -32,3 +32,7 @@ export const contrast = (
     ? c.shade(contrastDark).saturate(contrastDarkSaturate).rgb().toString()
     : c.tint(contrastLight).rgb().toString()
 }
+
+export const setAlpha = (color, alpha) => {
+  return Color(color).alpha(alpha).rgb().toString()
+}

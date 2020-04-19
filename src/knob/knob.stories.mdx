@@ -9,7 +9,29 @@ import KnobPlayground from './playground.stories-helper.js'
 
 # Knob
 
+Knob component to input a range value.
+
+<Preview>
+  <Story name='canvas'>
+    <div style={{ padding: '32px', background: color('contextBackgroundColor', '#333333') }}>
+      <KnobPlayground
+        min={number('min', 0)}
+        max={number('max', 1)}
+        law={select('law', ['linear', 'log', 'pow'], 'linear')}
+        size={select('size', ['small', 'medium', 'big'], 'medium')}
+        label={text('label', 'Gain')}
+        color={color('color', '#026558')}
+        contextBackgroundColor={color('contextBackgroundColor', '#333333')}
+        textColor={color('textColor', '#888888')}
+      />
+    </div>
+  </Story>
+</Preview>
+
+## Props
 <Props of={Knob} />
+
+## Multiple colors
 
 <Preview>
   <Story name='default'>
@@ -41,23 +63,6 @@ import KnobPlayground from './playground.stories-helper.js'
         textColor='#333333'
       />
     </span>
-    </div>
-  </Story>
-</Preview>
-
-<Preview>
-  <Story name='canvas'>
-    <div style={{ padding: '32px', background: color('contextBackgroundColor', '#333333') }}>
-      <KnobPlayground
-        min={number('min', 0)}
-        max={number('max', 1)}
-        law={select('law', ['linear', 'log', 'pow'], 'linear')}
-        size={select('size', ['small', 'medium', 'big'], 'medium')}
-        label={text('label', 'Gain')}
-        color={color('color', '#026558')}
-        contextBackgroundColor={color('contextBackgroundColor', '#333333')}
-        textColor={color('textColor', '#888888')}
-      />
     </div>
   </Story>
 </Preview>

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { lighten, luminosityFn, contrast } from '../color-utils'
+import { lighten, luminosityFn, contrast, setAlpha } from '../color-utils'
 import { applyLaw, reverseLaw } from '../maps.js'
 
 const Root = styled.div`
@@ -241,6 +241,9 @@ Knob.defaultProps = {
   size: 'medium',
   max: 1,
   min: 0,
+  color: '#333333',
+  contextBackgroundColor: '#333333',
+  textColor: '#DDDDDD',
 }
 
 export default Knob
