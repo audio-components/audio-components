@@ -44,24 +44,37 @@ const Wrapper = styled.div`
       ),
     // Knob shadow
       0 6px 10px
-      rgba(0, 0, 0, ${(props) => luminosityFn(props.color, -0.3, 0.4)}),
+      rgba(
+        0,
+        0,
+        0,
+        ${(props) => luminosityFn(props.contextBackgroundColor, -0.3, 0.4)}
+      ),
     // Bumb shadow
       0px 3px 5px 3px
-      rgba(0, 0, 0, ${(props) => luminosityFn(props.color, -0.2, 0.5) * 0.5}),
+      rgba(
+        0,
+        0,
+        0,
+        ${(props) =>
+          luminosityFn(props.contextBackgroundColor, -0.2, 0.5) * 0.25}
+      ),
     // Bump highligh
       0 -3px 12px 1px rgba(
         255,
         255,
         255,
-        ${(props) => luminosityFn(props.color, 0.85, 0.15)}
+        ${(props) =>
+          luminosityFn(props.contextBackgroundColor, 0.85, 0.15) * 0.5}
       ),
     // Bump ring hightlight
-      rgba(255, 255, 255, ${(props) => luminosityFn(props.color, 0.4, 0.6)}) 0 0
-      3px 0;
-
-  //box-shadow: inset 0 1px 1px 1px rgba(255, 255, 255, 0.76),
-  //inset 0 -1px 1px 1px rgba(0, 0, 0, 0.32), 0 6px 10px rgba(0, 0, 0, 0.15),
-  //0px 3px 5px 3px rgba(0, 0, 0, 0.15), 0 -3px 12px rgb(255, 255, 255);
+      rgba(
+        255,
+        255,
+        255,
+        ${(props) => luminosityFn(props.contextBackgroundColor, 0.4, 0.6)}
+      )
+      0 0 3px 0;
 
   ${(props) =>
     props.size === 'small' &&
@@ -174,12 +187,24 @@ class Knob extends React.Component {
   }
 
   render() {
-    const { value, size, label, color, textColor } = this.props
+    const {
+      value,
+      size,
+      label,
+      color,
+      textColor,
+      contextBackgroundColor,
+    } = this.props
     let rdeg = 45 + this.valueToDeg(this.reverseLaw(value))
 
     return (
       <Root size={size}>
-        <Wrapper size={size} color={color} onMouseDown={this.onMouseDown}>
+        <Wrapper
+          size={size}
+          color={color}
+          contextBackgroundColor={contextBackgroundColor}
+          onMouseDown={this.onMouseDown}
+        >
           <KnobHandle
             color={contrast(color)}
             size={size}
@@ -204,6 +229,7 @@ Knob.propTypes = {
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   onChange: PropTypes.func,
   color: PropTypes.string,
+  contextBackgroundColor: PropTypes.string,
   textColor: PropTypes.string,
 }
 

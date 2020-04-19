@@ -12,7 +12,7 @@ import Knob from '.'
 
 <Preview>
   <Story name='default'>
-    <div style={{ padding: '32px', background: color('color', '#333333') }}>
+    <div style={{ padding: '32px', background: color('contextBackgroundColor', '#333333') }}>
       <Knob
         value={number('value', 0)}
         min={number('min', 0)}
@@ -20,7 +20,8 @@ import Knob from '.'
         law={select('law', ['linear', 'log', 'pow'], 'linear')}
         size={select('size', ['small', 'medium', 'big'], 'medium')}
         label={text('label', 'Gain')}
-        color={color('color', '#333333')}
+        color={color('color', '#026558')}
+        contextBackgroundColor={color('contextBackgroundColor', '#333333')}
         textColor={color('textColor', '#888888')}
       />
     </div>

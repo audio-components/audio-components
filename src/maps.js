@@ -52,4 +52,3 @@ export const reverseLaw = (v, min, max, law) => {
   }
   return result
 }
-
