@@ -1,0 +1,46 @@
+import { Story, Preview, Props, Meta } from '@storybook/addon-docs/blocks'
+import { withKnobs, text, select, number, color } from '@storybook/addon-knobs'
+
+import ADSRGraph from '.'
+import ADSRGraphPlayground from './playground.stories-helper.js'
+
+<Meta title="ADSR Graph" />
+
+# ADSR Graph
+
+Component used to display an ADSR envelope.
+
+<Preview>
+  <Story name='default'>
+    <div style={{ padding: '32px', width: '400px', background: color('contextBackgroundColor', '#333333') }}>
+      <ADSRGraph
+        a={number('a', 0.15)}
+        d={number('d', 0.15)}
+        s={number('s', 0.5)}
+        r={number('r', 1.0)}
+        backgroundColor={color('backgroundColor', 'rgb(40, 56, 68)')}
+        contextBackgroundColor={color('contextBackgroundColor', '#333333')}
+        lineColor={color('lineColor', '#DDDDDD')}
+      />
+    </div>
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={ADSRGraph} />
+
+
+## Example with control knobs
+
+<Preview>
+  <Story name='control with knobs'>
+    <div style={{ padding: '32px', width: '400px', background: '#525252' }}>
+      <ADSRGraphPlayground
+        backgroundColor='rgb(40, 56, 68)'
+        contextBackgroundColor='#525252'
+        lineColor='#DDDDDD'
+      />
+    </div>
+  </Story>
+</Preview>
