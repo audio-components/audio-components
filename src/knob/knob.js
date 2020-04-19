@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -128,96 +128,97 @@ const Label = styled.span`
   color: ${(props) => props.color};
   font-weight: normal;
   font-size: 12px;
-  text-shadow: #000000a6 0px 1px 1px;
+  user-select: none;
 `
 
-class Knob extends React.Component {
-  handleChange = (value) => {
-    if (value > 1) {
-      value = 1
+const Knob = ({
+  value,
+  min,
+  max,
+  law,
+  onChange,
+  size,
+  label,
+  color,
+  textColor,
+  contextBackgroundColor,
+}) => {
+  const [dragging, setDragging] = useState(false)
+  const [dragPoint, setDragPoint] = useState([0, 0])
+  const [dragStartValue, setDragStartValue] = useState(0)
+
+  const handleMoveAll = useCallback(
+    (e) => {
+      if (dragging) {
+        let v = dragPoint[1] - e.screenY
+        v *= 0.003 // scale
+        handleChange(dragStartValue + v)
+      }
+    },
+    [dragging, dragStartValue, dragPoint, handleChange]
+  )
+
+  const handleMouseUp = useCallback(() => {
+    setDragging(false)
+  }, [setDragging])
+
+  useEffect(() => {
+    if (dragging) {
+      window.addEventListener('mousemove', handleMoveAll)
+      window.addEventListener('mouseup', handleMouseUp)
     }
-    if (value < 0) {
-      value = 0
+    return () => {
+      window.removeEventListener('mousemove', handleMoveAll)
+      window.removeEventListener('mouseup', handleMouseUp)
     }
+  }, [dragging, handleMoveAll, handleMouseUp])
 
-    this.props.onChange(this.applyLaw(value))
+  const handleChange = useCallback(
+    (v) => {
+      if (v > 1) {
+        v = 1
+      }
+      if (v < 0) {
+        v = 0
+      }
+
+      onChange(applyLaw(v, min, max, law))
+    },
+    [onChange, min, max, law]
+  )
+
+  const valueToDeg = (v) => {
+    return Math.round(v * 270)
   }
 
-  applyLaw = (v) => {
-    return applyLaw(v, this.props.min, this.props.max, this.props.law)
+  const onMouseDown = (e) => {
+    setDragPoint([e.screenX, e.screenY])
+    setDragging(true)
+    setDragStartValue(reverseLaw(value, min, max, law))
   }
 
-  reverseLaw = (v) => {
-    return reverseLaw(v, this.props.min, this.props.max, this.props.law)
-  }
+  let rdeg = 45 + valueToDeg(reverseLaw(value, min, max, law))
 
-  valueToDeg = (value) => {
-    return Math.round(value * 270)
-  }
-
-  onMouseDown = (e) => {
-    this.setState({
-      dragPoint: [e.screenX, e.screenY],
-      dragging: true,
-      dragStartValue: this.reverseLaw(this.props.value),
-    })
-  }
-
-  handleMoveAll = (e) => {
-    if (this.state.dragging) {
-      let value = this.state.dragPoint[1] - e.screenY
-      value *= 0.003 // scale
-      this.handleChange(this.state.dragStartValue + value)
-    }
-  }
-
-  handleMouseUp = () => {
-    this.setState({ dragging: false })
-  }
-
-  state = {
-    dragging: false,
-    dragPoint: [0.0, 0.0],
-    dragStartValue: 0,
-  }
-
-  componentDidMount() {
-    window.addEventListener('mousemove', this.handleMoveAll)
-    window.addEventListener('mouseup', this.handleMouseUp)
-  }
-
-  render() {
-    const {
-      value,
-      size,
-      label,
-      color,
-      textColor,
-      contextBackgroundColor,
-    } = this.props
-    let rdeg = 45 + this.valueToDeg(this.reverseLaw(value))
-
-    return (
-      <Root size={size}>
-        <Wrapper
+  return (
+    <Root size={size}>
+      <Wrapper
+        size={size}
+        color={color}
+        contextBackgroundColor={contextBackgroundColor}
+        onMouseDown={onMouseDown}
+      >
+        <KnobHandle
+          color={contrast(color)}
           size={size}
-          color={color}
-          contextBackgroundColor={contextBackgroundColor}
-          onMouseDown={this.onMouseDown}
-        >
-          <KnobHandle
-            color={contrast(color)}
-            size={size}
-            animated={!this.state.dragging}
-            style={{
-              transform: `rotate(${rdeg}deg)`,
-            }}
-          />
-        </Wrapper>
-        <Label color={textColor}>{label}</Label>
-      </Root>
-    )
-  }
+          animated={!dragging}
+          style={{
+            transform: `rotate(${rdeg}deg)`,
+          }}
+        />
+      </Wrapper>
+      <Label color={textColor}>{label}</Label>
+    </Root>
+  )
 }
 
 Knob.propTypes = {
@@ -226,7 +227,7 @@ Knob.propTypes = {
   max: PropTypes.number,
   law: PropTypes.string,
   label: PropTypes.string,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  size: PropTypes.oneOf(['small', 'medium', 'big']),
   onChange: PropTypes.func,
   color: PropTypes.string,
   contextBackgroundColor: PropTypes.string,

@@ -2,6 +2,7 @@ import { Story, Preview, Props, Meta } from '@storybook/addon-docs/blocks'
 import { withKnobs, text, select, number, color } from '@storybook/addon-knobs'
 
 import Knob from '.'
+import KnobPlayground from './playground.stories-helper.js'
 
 
 <Meta title="Knob" />
@@ -12,9 +13,42 @@ import Knob from '.'
 
 <Preview>
   <Story name='default'>
+    <div>
+    <span style={{ padding: '32px', background: '#333333', display: 'inline-block' }}>
+      <KnobPlayground
+        size='small'
+        label='GAIN'
+        color='#026558'
+        contextBackgroundColor='#333333'
+        textColor='#888888'
+      />
+    </span>
+    <span style={{ padding: '32px', background: '#DDDDDD', display: 'inline-block' }}>
+      <KnobPlayground
+        size='medium'
+        label='GAIN'
+        color='#333333'
+        contextBackgroundColor='#DDDDDD'
+        textColor='#333333'
+      />
+    </span>
+    <span style={{ padding: '32px', background: '#818181', display: 'inline-block' }}>
+      <KnobPlayground
+        size='big'
+        label='GAIN'
+        color='#CCB80E'
+        contextBackgroundColor='#818181'
+        textColor='#333333'
+      />
+    </span>
+    </div>
+  </Story>
+</Preview>
+
+<Preview>
+  <Story name='canvas'>
     <div style={{ padding: '32px', background: color('contextBackgroundColor', '#333333') }}>
-      <Knob
-        value={number('value', 0)}
+      <KnobPlayground
         min={number('min', 0)}
         max={number('max', 1)}
         law={select('law', ['linear', 'log', 'pow'], 'linear')}
