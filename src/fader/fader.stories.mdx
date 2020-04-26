@@ -1,0 +1,30 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks'
+
+import Fader from './fader'
+
+<Meta title="Components/Fader" />
+
+# Fader
+
+<Props of={Fader} />
+
+<Preview>
+  <Story name="default">
+    <Fader
+      onChange={(value) => {
+        console.log(value)
+      }}
+    />
+  </Story>
+</Preview>
+
+<Preview>
+  <Story name="horizontal">
+    <Fader
+      horizontal
+      onChange={(value) => {
+        console.log(value)
+      }}
+    />
+  </Story>
+</Preview>
